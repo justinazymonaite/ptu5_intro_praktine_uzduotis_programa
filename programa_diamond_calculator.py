@@ -1,4 +1,12 @@
 from tkinter import *
+import logging
+
+logging.basicConfig(
+    level=logging.DEBUG, 
+    filename="error_failas.log", 
+    encoding="UTF-8", 
+    format="%(asctime)s:%(levelname)s:%(name)s:%(funcName)s:%(message)s"
+) 
 
 langas = Tk()
 langas.title("Diamond calculator")
@@ -24,11 +32,13 @@ def apskaiciuoti_briliantu_kieki():
             kiekis_vnt = int((ivestas_ziedo_dydis + 2*ivestas_ziedo_aukstis)* 3.14)/(ivestas_brilianto_dydis + tarpelis)//rb_variable.get()
             l_rezultatas_kiekis_vnt["text"] = f"Reikės {kiekis_vnt} vnt. briliantų"
             kiekis.set(kiekis_vnt)
-        except Exception:
+        except Exception as e_error:
             l_error["text"] = "Būtina pasirinkti"
-    except ValueError:
+            logging.exception(f'Vykdant funkcija {apskaiciuoti_briliantu_kieki.__name__}, ivyko klaida {e_error.__class__.__name__}: {e_error}')
+    except ValueError as v_error:
         l_tarpas["text"] = "Įveskite skaičius"
-    
+        logging.exception(f'Vykdant funkcija {apskaiciuoti_briliantu_kieki.__name__}, ivyko klaida {v_error.__class__.__name__}: {v_error}')
+
 def skaiciuoti_briliantu_kaina():
     try:
         ivestas_brilianto_dydis_ct = float(e_brilianto_dydis_ct.get())
@@ -36,8 +46,9 @@ def skaiciuoti_briliantu_kaina():
         kaina = ivestas_brilianto_dydis_ct*ivesta_briliantu_kaina*kiekis.get()
         l_rezultatas_kaina_eur["text"] = f"{kaina} Eur"
         l_tarpas2["text"] = ""
-    except ValueError:
+    except ValueError as v_error:
         l_tarpas2["text"] = "Įveskite skaičius"
+        logging.exception(f'Vykdant funkcija {skaiciuoti_briliantu_kaina.__name__}, ivyko klaida {v_error.__class__.__name__}: {v_error}')
 
 def skaiciuoti_inkrustavimo_kaina():
     try:
@@ -45,8 +56,9 @@ def skaiciuoti_inkrustavimo_kaina():
         kaina = ivesta_inkrustavimo_kaina*kiekis.get()
         l_rezultatas_inkrustavimo_kaina_eur["text"] = f"{kaina} Eur"
         l_tarpas4["text"] = ""
-    except ValueError:
+    except ValueError as v_error:
         l_tarpas4["text"] = "Įveskite skaičių"
+        logging.exception(f'Vykdant funkcija {skaiciuoti_inkrustavimo_kaina.__name__}, ivyko klaida {v_error.__class__.__name__}: {v_error}')
 
 def kablelis():
     l_tarpas["text"] = "Naudokite tašką, o ne kablelį"
