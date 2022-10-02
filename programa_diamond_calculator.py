@@ -11,7 +11,7 @@ logging.basicConfig(
 langas = Tk()
 langas.title("Diamond calculator")
 langas.geometry("425x540")
-langas.iconbitmap('favicon.ico')
+langas.iconbitmap(bitmap='C:\\Users\\jzymo\\Documents\\python_codeacademy\\ptu5_intro_praktine_uzduotis_programa\\favicon.ico')
 
 kiekis = IntVar()
 
