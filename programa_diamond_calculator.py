@@ -11,7 +11,7 @@ logging.basicConfig(
 langas = Tk()
 langas.title("Diamond calculator")
 langas.geometry("425x540")
-langas.iconphoto(False, PhotoImage(file='diamond-13459.png'))
+langas.iconbitmap('favicon.ico')
 
 kiekis = IntVar()
 
